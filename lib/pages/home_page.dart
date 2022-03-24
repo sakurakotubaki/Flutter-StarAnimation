@@ -25,7 +25,7 @@ class _HomePageState extends State<HomePage>
       vsync: this,
       duration: Duration(seconds: 4),
     );
-    _starIconAnimationController!.forward();
+    _starIconAnimationController!.repeat();
   }
 
   @override
