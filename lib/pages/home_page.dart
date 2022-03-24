@@ -7,10 +7,23 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomePageState extends State<HomePage>
+    with SingleTickerProviderStateMixin {
   double _buttonRadius = 100;
   // ツイーンアニメーションビルダー
   final Tween<double> _backgroundScale = Tween<double>(begin: 0.0, end: 1.0);
+  //アニメーションコントローラー
+  AnimationController? _starIconAnimationController;
+
+  // アニメーションを初期化
+  @override
+  void initState() {
+    super.initState();
+    _starIconAnimationController = AnimationController(
+      vsync: this,
+      duration: Duration(seconds: 4),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +33,15 @@ class _HomePageState extends State<HomePage> {
           clipBehavior: Clip.none,
           children: [
             _pageBackground(),
-            _circularAnimationButton(),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              mainAxisSize: MainAxisSize.max,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                _circularAnimationButton(),
+                _starIcon(),
+              ],
+            ),
           ],
         ),
       ),
@@ -73,6 +94,15 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
       ),
+    );
+  }
+
+  // 星のアイコンの関数
+  Widget _starIcon() {
+    return const Icon(
+      Icons.star,
+      size: 100,
+      color: Colors.white,
     );
   }
 }
