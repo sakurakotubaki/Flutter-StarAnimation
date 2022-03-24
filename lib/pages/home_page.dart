@@ -8,7 +8,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-
   double _buttonRadius = 100;
 
   @override
@@ -36,13 +35,17 @@ class _HomePageState extends State<HomePage> {
   // 円形のコンテナの関数
   Widget _circularAnimationButton() {
     // GestureDetectorは、画面のタップやスワイプに関する処理を実装することができるので、アプリ開発には欠かせないウィジェット
-    return Center( // Centarでラップするとボタンを中央寄せにする
+    return Center(
+      // Centarでラップするとボタンを中央寄せにする
       child: GestureDetector(
         onTap: () {
+          setState(() {
+            _buttonRadius += _buttonRadius == 200 ? -100 : 100;
+          });
         },
         child: AnimatedContainer(
           duration: const Duration(seconds: 2), // 持続時間2秒
-          height: 100,
+          height: _buttonRadius,
           width: _buttonRadius,
           decoration: BoxDecoration(
             color: Colors.purple,
