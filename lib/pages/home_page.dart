@@ -10,6 +10,8 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   double _buttonRadius = 100;
 
+  final Tween<double> _backgroundScale = Tween<double>(begin: 0.0, end: 1.0);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,8 +29,18 @@ class _HomePageState extends State<HomePage> {
 
   // 背景の関数
   Widget _pageBackground() {
-    return Container(
-      color: Colors.blue,
+    return TweenAnimationBuilder(
+      tween: _backgroundScale,
+      duration: const Duration(seconds: 2),
+      builder: (_context, double _scale, _child) {
+        return Transform.scale(
+          scale: _scale,
+          child: _child,
+        );
+      },
+      child: Container(
+        color: Colors.blue,
+      ),
     );
   }
 
@@ -45,11 +57,18 @@ class _HomePageState extends State<HomePage> {
         },
         child: AnimatedContainer(
           duration: const Duration(seconds: 2), // 持続時間2秒
+          curve: Curves.bounceInOut, // ゆっくり動くアニメーション機能をつける
           height: _buttonRadius,
           width: _buttonRadius,
           decoration: BoxDecoration(
             color: Colors.purple,
             borderRadius: BorderRadius.circular(_buttonRadius),
+          ),
+          child: const Center(
+            child: Text(
+              "Basic!",
+              style: TextStyle(color: Colors.white),
+            ),
           ),
         ),
       ),
