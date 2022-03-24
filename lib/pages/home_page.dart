@@ -9,7 +9,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   double _buttonRadius = 100;
-
+  // ツイーンアニメーションビルダー
   final Tween<double> _backgroundScale = Tween<double>(begin: 0.0, end: 1.0);
 
   @override
@@ -31,7 +31,8 @@ class _HomePageState extends State<HomePage> {
   Widget _pageBackground() {
     return TweenAnimationBuilder(
       tween: _backgroundScale,
-      duration: const Duration(seconds: 2),
+      curve: Curves.easeInOutCubicEmphasized,
+      duration: const Duration(seconds: 1),
       builder: (_context, double _scale, _child) {
         return Transform.scale(
           scale: _scale,
