@@ -17,7 +17,7 @@ class _HomePageState extends State<HomePage> {
           children: [
             _pageBackground(),
             _circularAnimationButton(),
-            ],
+          ],
         ),
       ),
     );
@@ -32,10 +32,19 @@ class _HomePageState extends State<HomePage> {
 
   // 円形のコンテナの関数
   Widget _circularAnimationButton() {
-    return Container(
-      height: 100,
-      width: 100,
-      decoration: BoxDecoration(color: Colors.purple, borderRadius: BorderRadius.circular(100)),
+    // GestureDetectorは、画面のタップやスワイプに関する処理を実装することができるので、アプリ開発には欠かせないウィジェット
+    return GestureDetector(
+      onTap: () {
+        print("Tapped");
+      },
+      child: Container(
+        height: 100,
+        width: 100,
+        decoration: BoxDecoration(
+          color: Colors.purple,
+          borderRadius: BorderRadius.circular(100),
+        ),
+      ),
     );
   }
 }
