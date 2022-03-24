@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -23,6 +25,7 @@ class _HomePageState extends State<HomePage>
       vsync: this,
       duration: Duration(seconds: 4),
     );
+    _starIconAnimationController!.forward();
   }
 
   @override
@@ -99,10 +102,20 @@ class _HomePageState extends State<HomePage>
 
   // 星のアイコンの関数
   Widget _starIcon() {
-    return const Icon(
+    return AnimatedBuilder(
+      animation: _starIconAnimationController!.view,
+      builder: (_buildContext, _child) {
+      // Widgeを回転
+      return Transform.rotate(
+        angle: _starIconAnimationController!.value * 2 * pi, // 角度
+        child:  _child,
+        );
+      },
+      child: const Icon(
       Icons.star,
       size: 100,
       color: Colors.white,
+      ),
     );
   }
 }
